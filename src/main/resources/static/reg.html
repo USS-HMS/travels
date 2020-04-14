@@ -37,6 +37,7 @@
     </style>
 </head>
 <body>
+<div id="app">
     <div id="wrap">
         <div id="header">
             <div style="float: right;padding-top: 24px">2009/11/20</div>
@@ -49,22 +50,22 @@
             <form action="province/provincelist.html" method="post">
                 <label>
                     <div class="label-text">账&emsp;号：</div>
-                    <input type="text" name="username">
+                    <input type="text" v-model="user.username" name="username">
                 </label>
                 <label>
                     <div class="label-text">密&emsp;码：</div>
-                    <input type="password" name="password">
+                    <input type="password" v-model="user.password" name="password">
                 </label>
                 <label>
                     <div class="label-text">邮&emsp;箱：</div>
-                    <input type="text" name="email">
+                    <input type="text" v-model="user.email" name="email">
                 </label>
                 <img src="img/vcode.png" id="img-vcode">
                 <label>
                     <div class="label-text">验证码：</div>
-                    <input type="text" name="vcode" style="width: 100px">
+                    <input type="text" v-model="code" name="vcode" style="width: 100px">
                 </label>
-                <button type="submit">提 交</button>&emsp;
+                <button type="button" @click="saveUserInfo">提 交</button>&emsp;
                 <a href="login.html">去登录</a>
             </form>
         </div>
@@ -72,5 +73,33 @@
             ABC@126.com
         </div>
     </div>
+</div>
 </body>
 </html>
+
+<script src="./js/vue.js"></script>
+<script src="./js/axios.min.js"></script>
+<script>
+    const app =new Vue({
+        el:"#app",
+        data:{
+            user:{},
+            code:"",
+        },
+        methods:{
+            saveUserInfo(){
+                console.log(this.user);
+                console.log(this.code);
+                //发送axios
+                axios.post("http://localhost:8989/user/register?code="+this.code,this.user).then((res)=>{
+                    console.log(res.data);
+                    if (res.data.state){
+                        alert(res.data.state)
+                    } else {
+                        alert(res.data.state)
+                    }
+                });
+            }
+        }
+    });
+</script>
