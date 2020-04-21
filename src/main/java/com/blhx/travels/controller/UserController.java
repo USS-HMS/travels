@@ -33,11 +33,27 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+
+    @PostMapping("login")
+    @ResponseBody
+    public Result login(@RequestBody User user,HttpServletRequest request){
+        Result result=new Result();
+        log.info("user"+user);
+        try {
+            User userDB=userService.login(user);
+            //登陆成功后保存用户标记
+            request.getServletContext().setAttribute(userDB.getId(),userDB);
+            result.setMsg("登录成功").setUserId(userDB.getId());
+        }catch (Exception e){
+            result.setState(false).setMsg(e.getMessage());
+        }
+
+        return result;
+    }
     /**
      * 用户注册
      * @param code
      * @param user
-
      * @return
      */
     @PostMapping("register")

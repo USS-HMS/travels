@@ -18,7 +18,20 @@ public class UserServiceImpl implements UserService {
         }else {
             throw new RuntimeException("用户名已经存在");
         }
+    }
 
+    @Override
+    public User login ( User user ){
+       User usermp= userMapper.findByUsername(user.getUsername());
+        if (usermp!=null){
+            if (usermp.getPassword().equals(user.getPassword())){
+                return usermp;
+            }else {
+                throw new RuntimeException("密码错误");
+            }
+        }else {
+            throw new RuntimeException("用户名不正确");
+        }
     }
 }
 

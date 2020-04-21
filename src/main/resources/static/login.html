@@ -37,7 +37,7 @@
     </style>
 </head>
 <body>
-
+<div id="app">
     <div id="wrap">
         <div id="header">
             <div style="float: right;padding-top: 24px">2009/11/20</div>
@@ -50,18 +50,18 @@
             <form action="province/provincelist.html" method="post">
                 <label>
                     <div class="label-text">账&emsp;号：</div>
-                    <input type="text" name="username">
+                    <input type="text" v-model="user.username" name="username">
                 </label>
                 <label>
                     <div class="label-text">密&emsp;码：</div>
-                    <input type="password" name="password">
+                    <input type="password" v-model="user.password" name="password">
                 </label>
-                <img src="http://localhost:8989/user/getImage" id="img-vcode">
-                <label>
-                    <div class="label-text">验证码：</div>
-                    <input type="text" name="vcode" style="width: 100px">
-                </label>
-                <button type="submit">提 交</button>&emsp;
+                <!--<img src="img/vcode.png" id="img-vcode">-->
+                <!--<label>-->
+                    <!--<div class="label-text">验证码：</div>-->
+                    <!--<input type="text" name="vcode" style="width: 100px">-->
+                <!--</label>-->
+                <button type="button" @click="login">提 交</button>&emsp;
                 <a href="reg.html">去注册</a>
             </form>
         </div>
@@ -69,6 +69,32 @@
             ABC@126.com
         </div>
     </div>
-
+</div>
 </body>
 </html>
+<script src="./js/vue.js"></script>
+<script src="./js/axios.min.js"></script>
+<script>
+
+    const app = new Vue({
+        el:"#app",
+        data:{
+            user:{}
+        },
+        methods:{
+            login(){//登录
+                axios.post("http://localhost:8989/user/login",this.user).then((res)=>{
+                    console.log(res.data);
+                    localStorage.setItem("userid",res.data.userId);
+                    if(res.data.state){
+                        alert(res.data.msg +",点击确定进入主页!")
+                        location.href='./province/provincelist.html';
+                    }else{
+                        alert(res.data.msg);
+                    }
+                });
+            }
+        }
+    })
+
+</script>
