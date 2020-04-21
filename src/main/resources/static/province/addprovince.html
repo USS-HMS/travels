@@ -5,30 +5,36 @@
     <title>Title</title>
     <link rel="stylesheet" href="../css/style.css">
     <style>
-        form{
-            width:270px;
+        form {
+            width: 270px;
         }
-        input{
+
+        input {
             width: 70%;
             background: #eee;
         }
-        input:focus{
+
+        input:focus {
             background: #fff;
         }
-        form{
+
+        form {
             padding: 0 12px 12px;
         }
-        label{
+
+        label {
             display: block;
-            padding-bottom:12px;
+            padding-bottom: 12px;
         }
-        .label-text{
+
+        .label-text {
             width: 30%;
             float: left;
         }
     </style>
 </head>
 <body>
+<div id="app">
     <div id="wrap">
         <div id="header">
             <div style="float: right;padding-top: 24px">2009/11/20</div>
@@ -41,13 +47,13 @@
             <form action="provincelist.html" method="post">
                 <label>
                     <div class="label-text">省&emsp;份：</div>
-                    <input type="text" name="pname">
+                    <input type="text" v-model="province.name">
                 </label>
                 <label>
                     <div class="label-text">标&emsp;签：</div>
-                    <input type="text" name="ptag">
+                    <input type="text" v-model="province.tags">
                 </label>
-                <button type="submit">提 交</button>&emsp;
+                <button type="button" @click="saveProvinceInfo">提 交</button>&emsp;
                 <a href="provincelist.html">返回</a>
             </form>
         </div>
@@ -55,5 +61,28 @@
             ABC@126.com
         </div>
     </div>
+</div>
 </body>
 </html>
+<script src="../js/vue.js"></script>
+<script src="../js/axios.min.js"></script>
+<script>
+    const app = new Vue({
+        el: "#app",
+        data: {
+            province:{}
+        },
+        methods:{
+            saveProvinceInfo(){
+                axios.post("http://localhost:8989/province/save",this.province).then((res)=>{
+                   if(res.data.state){
+                       alert(res.data.msg+",点击确定跳转到省份列表页面!");
+                       location.href='./provincelist.html';
+                   }else{
+                       alert(res.data.msg);
+                   }
+                });
+            }
+        }
+    });
+</script>

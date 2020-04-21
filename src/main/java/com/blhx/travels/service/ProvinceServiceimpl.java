@@ -27,7 +27,8 @@ public class ProvinceServiceimpl implements ProvinceService{
 
     @Override
     public void save ( Province province ){
-
+        province.setPlacecounts(0);
+        provinceDAO.save(province);
     }
 
     @Override

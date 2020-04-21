@@ -1,6 +1,7 @@
 package com.blhx.travels.controller;
 
 import com.blhx.travels.entity.Province;
+import com.blhx.travels.entity.Result;
 import com.blhx.travels.service.ProvinceService;
 import com.blhx.travels.service.ProvinceServiceimpl;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +20,18 @@ public class ProvinceController {
 
     @Autowired
     private ProvinceService provinceService;
-
+    @PostMapping("save")
+    public Result save(@RequestBody Province province){
+        Result result =new Result();
+        try {
+            provinceService.save(province);
+            result.setMsg("省份信息填写成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            result.setState(false).setMsg("省份添加失败");
+        }
+        return result;
+    }
     /**
      * 查询所有
      * @param page
