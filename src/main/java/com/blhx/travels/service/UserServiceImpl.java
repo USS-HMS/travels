@@ -11,10 +11,14 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
-
     @Override
     public void register ( User user ){
-         userMapper.save(user);
+        if (userMapper.findByUsername(user.getUsername())==null){
+            userMapper.save(user);
+        }else {
+            throw new RuntimeException("用户名已经存在");
+        }
+
     }
 }
 
