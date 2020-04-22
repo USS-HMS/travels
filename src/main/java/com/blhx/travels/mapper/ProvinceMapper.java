@@ -17,7 +17,7 @@ public interface ProvinceMapper {
     Integer findTotals ( );
 
     //省份添加
-    @Insert("insert into t_province values(#{id},#{name},#{tags},#{placecounts}")
+    @Insert("insert into t_province values(#{id},#{name},#{tags},#{placecounts})")
     void save ( Province province );
 
     //省份删除

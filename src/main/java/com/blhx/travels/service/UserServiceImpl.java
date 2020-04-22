@@ -3,6 +3,7 @@ package com.blhx.travels.service;
 import com.blhx.travels.dao.UserDAO;
 import com.blhx.travels.entity.User;
 import com.blhx.travels.mapper.UserMapper;
+import com.blhx.travels.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -12,7 +12,6 @@ public interface ProvinceService {
     //参数1:当前页 //参数2:每页显示记录数
     List<Province> findByPage ( Integer page, Integer rows );
 
-
     //查询总跳数
     Integer findTotals ( );
 
