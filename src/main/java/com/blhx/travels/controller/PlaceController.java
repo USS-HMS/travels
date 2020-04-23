@@ -1,5 +1,6 @@
 package com.blhx.travels.controller;
 
+
 import com.blhx.travels.entity.Place;
 import com.blhx.travels.entity.Result;
 import com.blhx.travels.service.PlaceService;
@@ -9,7 +10,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.Base64Utils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,11 +23,56 @@ import java.util.Map;
 @CrossOrigin
 @RequestMapping("place")
 public class PlaceController {
+
+
     @Autowired
     private PlaceService placeService;
 
     @Value("${upload.dir}")
     private String realPath;
+
+    @PostMapping("update")
+    public Result update(MultipartFile pic ,Place place){
+        Result result = new Result();
+        try {
+            //文件上传
+            String extension = FilenameUtils.getExtension(pic.getOriginalFilename());
+            String newFileName = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + extension;
+            //base64编码处理
+            place.setPicpath(Base64Utils.encodeToString(pic.getBytes()));
+            //文件上传
+            File file = new File(realPath);
+            pic.transferTo(new File(file,newFileName));
+            //保存place对象
+            placeService.update(place);
+            result.setMsg("修改景点信息成功!!!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.setState(false).setMsg(e.getMessage());
+        }
+        return result;
+    }
+    @GetMapping("findOne")
+    public Place findOne(String id){
+        return placeService.findOne(id);
+    }
+    /**
+     * 删除景点信息
+     * @param id
+     * @return
+     */
+    @GetMapping("delete")
+    public Result delete(String id){
+        Result result = new Result();
+        try{
+            placeService.delete(id);
+            result.setMsg("删除景点信息成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            result.setState(false).setMsg(e.getMessage());
+        }
+        return result;
+    }
 
     /**
      * 保存景点信息
@@ -36,7 +81,7 @@ public class PlaceController {
      * @return
      */
     @PostMapping("save")
-    public Result save(MultipartFile pic, Place place) throws IOException{
+    public Result save(MultipartFile pic, Place place) throws IOException {
         Result result = new Result();
         try {
             //文件上传
@@ -54,9 +99,10 @@ public class PlaceController {
             e.printStackTrace();
             result.setState(false).setMsg(e.getMessage());
         }
-
         return result;
     }
+
+
     /**
      * 根据省份id查询景点的方法
      */

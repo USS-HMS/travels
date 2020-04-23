@@ -50,23 +50,23 @@ public class ProvinceController {
         }
         return result;
     }
-//    /**
-//     * 添加省份
-//     * @param province
-//     * @return
-//     */
-//    @PostMapping("save")
-//    public Result save(@RequestBody Province province){
-//        Result result =new Result();
-//        try {
-//            provinceService.save(province);
-//            result.setMsg("省份信息填写成功");
-//        }catch (Exception e){
-//            e.printStackTrace();
-//            result.setState(false).setMsg("省份添加失败");
-//        }
-//        return result;
-//    }
+    /**
+     * 添加省份
+     * @param province
+     * @return
+     */
+    @PostMapping("save")
+    public Result save(@RequestBody Province province){
+        Result result =new Result();
+        try {
+            provinceService.save(province);
+            result.setMsg("省份信息填写成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            result.setState(false).setMsg("省份添加失败");
+        }
+        return result;
+    }
     /**
      * 查询所有
      * @param page
