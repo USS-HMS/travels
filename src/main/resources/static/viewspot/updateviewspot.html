@@ -7,24 +7,30 @@
     <style>
         form{
             width:270px;
+            margin: auto;
+            margin-top: 20%;
         }
-        input{
-            width: 64%;
-            background: #eee;
-        }
-        input:focus{
-            background: #fff;
-        }
-        form{
-            padding: 0 12px 12px;
-        }
+
         label{
             display: block;
-            padding-bottom:12px;
+            padding-bottom:20px;
         }
+
         .label-text{
-            width: 36%;
             float: left;
+        }
+        body{
+            background: url("https://images7.alphacoders.com/370/thumb-1920-370162.jpg") ;
+            background-size: cover;
+        }
+        #content{
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            margin: -170px 0 0 -250px;
+            width: 500px;
+            height: 300px;
+            background:transparent;
         }
         #img-show{
             width: 135px;
@@ -49,58 +55,47 @@
 </head>
 <body>
 <div id="app">
-    <div id="wrap">
-        <div id="header">
-            <div style="float: right;padding-top: 24px">2009/11/20</div>
-            <h1>旅游信息管理系统</h1>
-        </div>
-        <div id="header-bar"></div>
         <div id="content" style="height: 480px">
-            <img src="../img/timg.jpg" style="float: right;height: 320px">
-            <h2>修改景点</h2>
+            <h2 style="margin-left: 150px;color: lawngreen">修改景点</h2>
             <form action="viewspotlist.html" method="post">
                 <label>
-                    <div class="label-text">景&emsp;&emsp;点：</div>
+                    <div class="label-text"><b style="color: blanchedalmond ">  景&emsp;&emsp;点：</b></div>
                     <input type="text" v-model="place.name">
                 </label>
                 <label>
-                    <div class="label-text">印象图片：</div>
+                    <div class="label-text"><b style="color: blanchedalmond; ">映像图片：</b></div>
                     <div style="text-align: center;padding-left: 36%">
                         <img :src="src" alt="" id="img-show">
                         <input type="file" id="imgfile" ref="myFile" style="display: none" onchange="imgfileChange()">
                     </div>
                 </label>
                 <label>
-                    <div class="label-text">旺季时间：</div>
+                    <div class="label-text"><b style="color: blanchedalmond ">旺季时间：</b></div>
                     <input type="text" v-model="place.hottime">
                 </label>
                 <label>
-                    <div class="label-text">旺季门票：</div>
+                    <div class="label-text"><b style="color: blanchedalmond ">旺季门票：</b></div>
                     <input type="text" v-model="place.hotticket">
                 </label>
                 <label>
-                    <div class="label-text">淡季门票：</div>
+                    <div class="label-text"><b style="color: blanchedalmond ">淡季门票：</b></div>
                     <input type="text" v-model="place.dimticket">
                 </label>
                 <label>
-                    <div class="label-text">景点描述：</div>
+                    <div class="label-text"><b style="color: blanchedalmond ">景点描述：</b></div>
                     <input type="text" v-model="place.placedes">
                 </label>
                 <label>
-                    <div class="label-text">所属省份：</div>
+                    <div class="label-text"><b style="color: blanchedalmond ">所属省份：</b></div>
                     <select v-model="place.provinceid">
                         <option  v-for="(pro,index) in provinces" :value="pro.id" v-text="pro.name"></option>
                     </select>
                 </label>
-                <button type="button" @click="updatePlace">提 交</button>&emsp;
-                <a :href="'viewspotlist.html?id='+ place.provinceid">返回</a>
+                <button type="button" @click="updatePlace" style="margin-left: 60px;color: deepskyblue">提 交</button>&emsp;
+                <a :href="'viewspotlist.html?id='+ place.provinceid" style="margin-left: 40px;color: deepskyblue">返回</a>
             </form>
         </div>
-        <div id="footer">
-            ABC@126.com
-        </div>
     </div>
-</div>
 </body>
 </html>
 <script src="../js/vue.js"></script>

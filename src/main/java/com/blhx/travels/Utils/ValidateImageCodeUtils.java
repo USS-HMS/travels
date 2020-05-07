@@ -87,14 +87,14 @@ public class ValidateImageCodeUtils {
 
         int codeLength = securityCode.length();//验证码长度
 
-        int fontSize = 18;//字体大小
+        int fontSize = 10;//字体大小
 
-        int fontWidth = fontSize+1;
+        int fontWidth = fontSize;
 
         //图片宽高
 
-        int width = codeLength*fontWidth+60;
-        int height = fontSize*2+1;
+        int width = codeLength*fontWidth;
+        int height = fontSize-3;
         //图片
 
         BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);

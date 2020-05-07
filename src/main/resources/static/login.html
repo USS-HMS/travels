@@ -7,69 +7,53 @@
     <style>
         form{
             width:270px;
+            margin: auto;
+            margin-top: 20%;
         }
-        input{
-            width: 70%;
-            background: #eee;
-        }
-        input:focus{
-            background: #fff;
-        }
-        form{
-            padding: 0 12px 12px;
-        }
+
         label{
             display: block;
-            padding-bottom:12px;
+            padding-bottom:20px;
         }
-        #img-vcode{
-            width: 56px;
-            height: 21px;
-            float:right;
-            position: relative;
-            top:2px;
-            left:-6px
-        }
+
         .label-text{
-            width: 30%;
             float: left;
+        }
+        body{
+            background: url("https://images5.alphacoders.com/506/thumb-1920-506616.jpg") ;
+            background-size: cover;
+        }
+        #content{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin: -170px 0 0 -250px;
+            width: 500px;
+            height: 300px;
+            background:transparent;
         }
     </style>
 </head>
 <body>
-<div id="app">
-    <div id="wrap">
-        <div id="header">
-            <div style="float: right;padding-top: 24px">2009/11/20</div>
-            <h1>旅游信息管理系统</h1>
-        </div>
-        <div id="header-bar"></div>
-        <div id="content" style="height: 360px">
-            <img src="img/timg.jpg" style="float: right;height: 320px">
-            <h2>登录</h2>
-            <form action="province/provincelist.html" method="post">
+<div id="app" >
+        <div id="content" >
+            <form action="province/provincelist.html" method="post" >
+               <label style="margin-left: 28%;margin-bottom: 10px">
+                   <h2 style="font-style: oblique;font-size: 20px;color: lightgreen">旅游景点管理系统</h2>
+               </label>
                 <label>
-                    <div class="label-text">账&emsp;号：</div>
-                    <input type="text" v-model="user.username" name="username">
+                    <div class="label-text" ><b style="color:lightgreen ">账&emsp;号：</b></div>
+                    <input type="text" v-model="user.username" name="username" >
                 </label>
                 <label>
-                    <div class="label-text">密&emsp;码：</div>
-                    <input type="password" v-model="user.password" name="password">
+                    <div class="label-text"><b style="color:lightgreen ">密&emsp;码</b>：</div>
+                    <input type="password" v-model="user.password" name="password" >
                 </label>
-                <!--<img src="img/vcode.png" id="img-vcode">-->
-                <!--<label>-->
-                    <!--<div class="label-text">验证码：</div>-->
-                    <!--<input type="text" name="vcode" style="width: 100px">-->
-                <!--</label>-->
-                <button type="button" @click="login">提 交</button>&emsp;
-                <a href="reg.html">去注册</a>
+                <button type="button" @click="login" style="margin-left: 20%;margin-top: 10px;background-color: lightgreen">提 交</button>&emsp;
+                <a href="reg.html" style="margin-left: 20px;color: lightgreen">去注册</a>
             </form>
         </div>
-        <div id="footer">
-            ABC@126.com
-        </div>
     </div>
-</div>
 </body>
 </html>
 <script src="./js/vue.js"></script>
